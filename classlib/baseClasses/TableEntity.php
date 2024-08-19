@@ -80,23 +80,8 @@ class TableEntity {
      * 
      */
     public function select_all(){
-        $this->SQL = "SELECT * FROM  $this->tableName";  //construct the SQL query
-        
-        //try to execute the query
-        try {
-                $rs=$this->db->query($this->SQL);
-                if($rs->num_rows){ //make sure recordset not empty
-                    return $rs; //return the requested recordset
-                }
-                else{
-                    return false;  //no records found
-                }  
-        } catch (mysqli_sql_exception $e) { //catch the exception 
-                $this->MySQLiErrorNr=$e->getCode();
-                $this->MySQLiErrorMsg=$e->getMessage();
-                return false;  //the query failed for some reason
-            }    
-            
+        $sql = "SELECT * FROM  $this->tableName";  //construct the SQL query
+        return $this->db->query($sql);            
     }
 
 
@@ -123,7 +108,7 @@ class TableEntity {
             $diagnostic = '<!-- TABLE ENTITY CLASS PROPERTY SECTION  -->';
             $diagnostic .= '<div class="container-fluid"   style="background-color: #AAAAAA">'; //outer DIV
                 $diagnostic .= '<h3>TABLE ENTITY CLASS (CLASS): '.$this->tableName.'</h3>';
-                $diagnostic .= '<table border=1 border-style: dashed; style="background-color: #EEEEEE" >';
+                $diagnostic .= '<table>';
                 $diagnostic .= '<tr><th>PROPERTY</th><th>VALUE</th></tr>';                        
                 $diagnostic .= "<tr><td>Entity Table Name</td>   <td>$this->tableName</td></tr>";
                 $diagnostic .= "<tr><td>MySQLi Error Nr</td>   <td>$this->MySQLiErrorNr</td></tr>";
