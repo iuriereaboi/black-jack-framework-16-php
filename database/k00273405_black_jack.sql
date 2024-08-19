@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `k00999999_framework_16` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci */;
-USE `k00999999_framework_16`;
+CREATE DATABASE  IF NOT EXISTS `k00273405_black_jack` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci */;
+USE `k00273405_black_jack`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: k00999999_framework_16
