@@ -1,16 +1,5 @@
 <?php
-/**
-* This file contains the ChatMsgTable Class
-* 
-*/
 
-/**
- * 
- * ChatMsgTable entity class implements the table entity class for the 'chatmsg' table in the database. 
- * 
- * @author Gerry Guinane
- * 
- */
 
 class ChatMsgTable extends TableEntity {
 

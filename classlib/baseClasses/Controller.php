@@ -1,19 +1,4 @@
 <?php
-/**
-* This file contains the Controller Abstract Class
-* 
-*/
-
-/**
- * 
- * Abstract Base class for Controllers. 
- * 
- * The main functions of a Controller are to get user inputs and to update the View. The purpose of this abstract base class is to implement <em><b>the ControllerInterface</b></em>  for all controllers.  
- * 
- * @author Gerry Guinane
- * 
- */
-
 
 abstract class Controller implements ControllerInterface{
 

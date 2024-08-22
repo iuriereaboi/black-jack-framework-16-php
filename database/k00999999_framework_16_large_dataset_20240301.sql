@@ -1,21 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `k00999999_framework_16` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci */;
 USE `k00999999_framework_16`;
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
---
--- Host: 127.0.0.1    Database: k00999999_framework_16
--- ------------------------------------------------------
--- Server version	5.5.5-10.4.28-MariaDB
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `chatmsg`
@@ -105,16 +90,13 @@ CREATE TABLE `user` (
   `PassWord` varchar(45) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
   `mobile` varchar(45) DEFAULT NULL,
-  `idcounty` int(11) NOT NULL,
   `userID` varchar(45) DEFAULT NULL,
   `userTypeNr` int(11) NOT NULL,
   `userEnabled` tinyint(4) DEFAULT 1,
   PRIMARY KEY (`UserNr`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `userID_UNIQUE` (`userID`),
-  KEY `fk_admin_county2_idx` (`idcounty`),
   KEY `fk_user_userType1_idx` (`userTypeNr`),
-  CONSTRAINT `fk_admin_county2` FOREIGN KEY (`idcounty`) REFERENCES `county` (`idcounty`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_userType1` FOREIGN KEY (`userTypeNr`) REFERENCES `usertype` (`userTypeNr`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1050 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

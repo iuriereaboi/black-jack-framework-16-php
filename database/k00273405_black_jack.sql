@@ -48,48 +48,18 @@ UNLOCK TABLES;
 -- Table structure for table `country`
 --
 
-DROP TABLE IF EXISTS `country`;
+DROP TABLE IF EXISTS `games`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `country` (
+CREATE TABLE `games` (
   `id` int(11) NOT NULL,
-  `country_name` varchar(255) NOT NULL
+  `game_result` varchar(50) NOT NULL
+  'game_date' datetime DEFAULT current_timestamp(),
+  'bet_amount' int(11) NOT NULL,
+  'created_at' datetime DEFAULT current_timestamp(),
+  KEY `fk_user_user1_idx` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `country`
---
-
-LOCK TABLES `country` WRITE;
-/*!40000 ALTER TABLE `country` DISABLE KEYS */;
-INSERT INTO `country` VALUES (1,'Afghanistan'),(2,'Albania'),(3,'Bahamas'),(4,'Bahrain'),(5,'Cambodia'),(6,'Cameroon'),(7,'Denmark'),(8,'Djibouti'),(9,'East Timor'),(10,'Ecuador'),(11,'Falkland Islands (Malvinas)'),(12,'Faroe Islands'),(13,'Gabon'),(14,'Gambia'),(15,'Haiti'),(16,'Heard and Mc Donald Islands'),(17,'Iceland'),(18,'India'),(19,'Jamaica'),(20,'Japan'),(21,'Kenya'),(22,'Kiribati'),(23,'Lao Peoples Democratic Republic'),(24,'Latvia'),(25,'Macau'),(26,'Macedonia'),(27,'Namibia'),(28,'Nauru'),(29,'Oman'),(30,'Pakistan'),(31,'Palau'),(32,'Qatar'),(33,'Reunion'),(34,'Romania'),(35,'Saint Kitts and Nevis'),(36,'Saint Lucia'),(37,'Taiwan'),(38,'Tajikistan'),(39,'Uganda'),(40,'Ukraine'),(41,'Vanuatu'),(42,'Vatican City State'),(43,'Wallis and Futuna Islands'),(44,'Western Sahara'),(45,'Yemen'),(46,'Yugoslavia'),(47,'Zaire'),(48,'Zambia');
-/*!40000 ALTER TABLE `country` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `county`
---
-
-DROP TABLE IF EXISTS `county`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `county` (
-  `idcounty` int(11) NOT NULL AUTO_INCREMENT,
-  `countyName` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idcounty`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `county`
---
-
-LOCK TABLES `county` WRITE;
-/*!40000 ALTER TABLE `county` DISABLE KEYS */;
-INSERT INTO `county` VALUES (1,'Antrim'),(2,'Armagh'),(3,'Carlow'),(4,'Cavan'),(5,'Clare'),(6,'Cork'),(7,'Donegal'),(8,'Down'),(9,'Dublin'),(10,'DunLaoghaire-Rathdown'),(11,'Fermanagh'),(12,'Fingal'),(13,'Galway'),(14,'Kerry'),(15,'Kildare'),(16,'Kilkenny'),(17,'Laois'),(18,'Leitrim'),(19,'Limerick'),(20,'Londonderry'),(21,'Longford'),(22,'Louth'),(23,'Mayo'),(24,'Meath'),(25,'Monaghan'),(26,'North Tipperary'),(27,'Offaly'),(28,'Roscommon'),(29,'Sligo'),(30,'South Dublin'),(31,'South Tipperary'),(32,'Tipperary'),(33,'Tyrone'),(34,'Waterford'),(35,'Westmeath'),(36,'Wexford'),(37,'Wicklow'),(99,'Unknown County');
-/*!40000 ALTER TABLE `county` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `user`
@@ -105,16 +75,14 @@ CREATE TABLE `user` (
   `PassWord` varchar(45) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
   `mobile` varchar(45) DEFAULT NULL,
-  `idcounty` int(11) NOT NULL,
+  `idgame` int(11) NOT NULL,
   `userID` varchar(45) DEFAULT NULL,
   `userTypeNr` int(11) NOT NULL,
   `userEnabled` tinyint(4) DEFAULT 1,
   PRIMARY KEY (`UserNr`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `userID_UNIQUE` (`userID`),
-  KEY `fk_admin_county2_idx` (`idcounty`),
   KEY `fk_user_userType1_idx` (`userTypeNr`),
-  CONSTRAINT `fk_admin_county2` FOREIGN KEY (`idcounty`) REFERENCES `county` (`idcounty`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_userType1` FOREIGN KEY (`userTypeNr`) REFERENCES `usertype` (`userTypeNr`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -149,7 +117,7 @@ CREATE TABLE `usertype` (
 
 LOCK TABLES `usertype` WRITE;
 /*!40000 ALTER TABLE `usertype` DISABLE KEYS */;
-INSERT INTO `usertype` VALUES (1,'ADMIN'),(2,'MANAGER'),(3,'CUSTOMER'),(99,'UNKNOWN');
+INSERT INTO `usertype` VALUES (1,'ADMIN'),(2,'DEALER'),(3,'PLAYER'),(99,'UNKNOWN');
 /*!40000 ALTER TABLE `usertype` ENABLE KEYS */;
 UNLOCK TABLES;
 
