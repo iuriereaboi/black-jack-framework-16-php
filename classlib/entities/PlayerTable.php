@@ -7,13 +7,13 @@ class PlayerTable extends TableEntity
 {
 
     /**
-     * Constructor for the CountyTable Class
+     * Constructor for the gamesTable Class
      *
      * @param MySQLi $databaseConnection The database connection object.
      */
     function __construct($databaseConnection)
     {
-        parent::__construct($databaseConnection, 'county');  //the name of the table is passed to the parent constructor
+        parent::__construct($databaseConnection, 'games');  //the name of the table is passed to the parent constructor
     }
 
 
@@ -21,7 +21,7 @@ class PlayerTable extends TableEntity
      * Inserts a new record in the table.
      *
      * @param array $postArray containing data to be inserted
-     * $postArray['county'] string County Name
+     * $postArray['games'] string games Name
      *
      * @return boolean
      *
@@ -34,11 +34,11 @@ class PlayerTable extends TableEntity
         extract($postArray);
 
         //add escape to special characters
-        $countyName = addslashes($county);
+        $gameId = addslashes($games);
 
 
         //construct the INSERT SQL
-        $this->SQL = "INSERT INTO county (countyName) VALUES ('$countyName')";
+        $this->SQL = "INSERT INTO games (gameId) VALUES ('$gameId')";
 
 
         //execute the  query
@@ -48,19 +48,19 @@ class PlayerTable extends TableEntity
 
 
     /**
-     * Performs a DELETE query for a single record ($idcounty).  Verifies the
+     * Performs a DELETE query for a single record ($gameDate).  Verifies the
      * record exists before attempting to delete
      *
-     * @param $idCounty  String containing ID of county record to be deleted
+     * @param $gameDate  String containing ID of games record to be deleted
      *
      * @return boolean Returns FALSE on failure. For successful DELETE returns TRUE
      */
-    public function deleteRecordById($idCounty)
+    public function deleteRecordById($gameDate)
     {
-        if (!$this->getRecordByID($idCounty))
+        if (!$this->getRecordByID($gameDate))
             return false;
 
-        $sql = "DELETE FROM county WHERE ID='$idCounty'";
+        $sql = "DELETE FROM games WHERE ID='$gameDate'";
 
         $this->db->query($sql);
         return true;
@@ -68,24 +68,24 @@ class PlayerTable extends TableEntity
 
     /**
      * Performs a SELECT query to returns all records from the table.
-     * idcounty,countyName columns only.
+     * gameDate,gameId columns only.
      *
      * @return mixed Returns false on failure. For successful SELECT returns a mysqli_result object $rs
      */
     public function getAllRecords()
     {
-        $sql = 'SELECT idcounty, countyName FROM county';  //construct the SQL
+        $sql = 'SELECT gameDate, gameId FROM games';  //construct the SQL
         return $this->db->query($sql);
     }
     /**
-     * Returns a partial record (countyName only by ID)
+     * Returns a partial record (gameId only by ID)
      *
-     * @param string $idCounty
+     * @param string $gameDate
      * @return mixed Returns false on failure. For successful SELECT returns a mysqli_result object $rs
      */
-    public function getRecordByID($idCounty)
+    public function getRecordByID($gameDate)
     {
-        $sql = "SELECT idcounty, countyName FROM county WHERE idcounty = '$idCounty'";
+        $sql = "SELECT gameDate, gameId FROM games WHERE gameDate = '$gameDate'";
         return $this->db->query($sql);
     }
     public function updateRecord($postArray)
@@ -95,10 +95,10 @@ class PlayerTable extends TableEntity
 
         //add escape to special characters
         $name = addslashes($name);//
-        $idCounty = (integer)$idCounty;
+        $gameDate = (integer)$gameDate;
 
         //construct the INSERT SQL
-        $sql = "UPDATE county SET CountyName='$name' WHERE countyId='$idCounty'";
+        $sql = "UPDATE games SET gameId='$name' WHERE gamesId='$gameDate'";
 
         //execute the query
         $rs = $this->db->query($sql);

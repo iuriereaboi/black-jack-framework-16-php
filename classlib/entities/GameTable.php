@@ -3,17 +3,17 @@
 /**
  * A Class to act as Repository for the Table Country
  */
-class CountyTable extends TableEntity
+class GameTable extends TableEntity
 {
 
     /**
-     * Constructor for the CountyTable Class
+     * ConstructoGameTable Class
      *
      * @param MySQLi $databaseConnection The database connection object.
      */
     function __construct($databaseConnection)
     {
-        parent::__construct($databaseConnection, 'county');  //the name of the table is passed to the parent constructor
+        parent::__construct($databaseConnection, 'games');  //the name of the table is passed to the parent constructor
     }
 
 
@@ -21,7 +21,7 @@ class CountyTable extends TableEntity
      * Inserts a new record in the table.
      *
      * @param array $postArray containing data to be inserted
-     * $postArray['county'] string County Name
+     * $postArray['games'] string games Name
      *
      * @return boolean
      *
@@ -34,11 +34,11 @@ class CountyTable extends TableEntity
         extract($postArray);
 
         //add escape to special characters
-        $countyName = addslashes($county);
+        $gameName = addslashes($gameName);
 
 
         //construct the INSERT SQL
-        $this->SQL = "INSERT INTO county (countyName) VALUES ('$countyName')";
+        $this->SQL = "INSERT INTO result (games) VALUES ('$gameName')";
 
 
         //execute the  query
@@ -48,19 +48,19 @@ class CountyTable extends TableEntity
 
 
     /**
-     * Performs a DELETE query for a single record ($idcounty).  Verifies the
+     * Performs a DELETE query for a single record ($gameResult).  Verifies the
      * record exists before attempting to delete
      *
-     * @param $idCounty  String containing ID of county record to be deleted
+     * @param $gameResult  String containing ID of games record to be deleted
      *
      * @return boolean Returns FALSE on failure. For successful DELETE returns TRUE
      */
-    public function deleteRecordById($idCounty)
+    public function deleteRecordById($idGame)
     {
-        if (!$this->getRecordByID($idCounty))
+        if (!$this->getRecordByID($idGame))
             return false;
 
-        $sql = "DELETE FROM county WHERE ID='$idCounty'";
+        $sql = "DELETE FROM games WHERE ID='$idGame'";
 
         $this->db->query($sql);
         return true;
@@ -68,24 +68,24 @@ class CountyTable extends TableEntity
 
     /**
      * Performs a SELECT query to returns all records from the table.
-     * idcounty,countyName columns only.
+     * gameResult betAmount columns only.
      *
      * @return mixed Returns false on failure. For successful SELECT returns a mysqli_result object $rs
      */
     public function getAllRecords()
     {
-        $sql = 'SELECT idcounty, countyName FROM county';  //construct the SQL
+        $sql = 'SELECT gameResult, betAmount FROM games';  //construct the SQL
         return $this->db->query($sql);
     }
     /**
-     * Returns a partial record (countyName only by ID)
+     * Returns a partial record  betAmount only by ID)
      *
-     * @param string $idCounty
+     * @param string $gameResult
      * @return mixed Returns false on failure. For successful SELECT returns a mysqli_result object $rs
      */
-    public function getRecordByID($idCounty)
+    public function getRecordByID($gameResult)
     {
-        $sql = "SELECT idcounty, countyName FROM county WHERE idcounty = '$idCounty'";
+        $sql = "SELECT gameResult, betAmount FROM games WHERE gameResult = '$gameResult'";
         return $this->db->query($sql);
     }
     public function updateRecord($postArray)
@@ -94,11 +94,11 @@ class CountyTable extends TableEntity
         extract($postArray);
 
         //add escape to special characters
-        $name = addslashes($name);//
-        $idCounty = (integer)$idCounty;
+        $chips = addslashes($chips);//
+        $gameResult = (integer)$gameResult;
 
         //construct the INSERT SQL
-        $sql = "UPDATE county SET CountyName='$name' WHERE countyId='$idCounty'";
+        $sql = "UPDATE games SET betAmount='$chips' WHERE gamesId='$gameResult'";
 
         //execute the query
         $rs = $this->db->query($sql);

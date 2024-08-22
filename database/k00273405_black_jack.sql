@@ -52,10 +52,10 @@ DROP TABLE IF EXISTS `games`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `games` (
-  `id` int(11) NOT NULL,
-  `game_result` varchar(50) NOT NULL
-  'game_date' datetime DEFAULT current_timestamp(),
-  'bet_amount' int(11) NOT NULL,
+  `gamesId` int(11) NOT NULL,
+  `gameResult` varchar(50) NOT NULL
+  'gameDate' datetime DEFAULT current_timestamp(),
+  'betAmount' int(11) NOT NULL,
   'created_at' datetime DEFAULT current_timestamp(),
   KEY `fk_user_user1_idx` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;

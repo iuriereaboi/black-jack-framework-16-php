@@ -52,8 +52,8 @@ class AccountAdminCustomer extends PanelModel {
      * Set the Panel 1 text content 
      */   
     public function setPanelContent_1(){
-        $countyTable=new CountyTable($this->db);
-        $this->panelContent_1 = Form::form_register($countyTable,'registerCustomer');           
+        $GameTable=new GameTable($this->db);
+        $this->panelContent_1 = Form::form_register($GameTable,'registerCustomer');           
     }        
 
     /**
